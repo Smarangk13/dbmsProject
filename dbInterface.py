@@ -10,5 +10,6 @@ class dbManager:
         print(command)
         pass
 
-interface = dbManager()
-interface.addEntrySales(str(205))
+if __name__ == '__main__':
+    interface = dbManager()
+    interface.addEntrySales(str(205))
