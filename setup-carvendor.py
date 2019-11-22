@@ -4,28 +4,34 @@ conn = sqlite3.connect("CS579.db")
 
 cursor = conn.cursor()
 
+dropCar = 'DROP TABLE IF EXISTS Car'
+cursor.execute(dropCar)
+
+dropVendor = 'DROP TABLE IF EXISTS Vendor'
+cursor.execute(dropVendor)
+
 tables = []
 
 # Create all tables here
 carsTable = """CREATE TABLE Car (
-                CarVIN Integer
-                Model text
-                Make text
-                Year text
-                color text
-                Value real
-                Engine text
-                VendorID Integer
-                PurchasePrice real
+                CarVIN Integer, 
+                Model, 
+                Make text, 
+                Year text, 
+                color text, 
+                Value real, 
+                Engine text, 
+                VendorID Integer, 
+                PurchasePrice real, 
                 PurchaseDate text
                 )"""
 tables.append(carsTable)
 
 vandorTable = """CREATE TABLE Vendor (
-                VendorID Integer
-                Name text text
-                Address text
-                PhoneNumber text
+                VendorID Integer, 
+                Name text text, 
+                Address text, 
+                PhoneNumber text, 
                 VendorType text
                 )"""
 
