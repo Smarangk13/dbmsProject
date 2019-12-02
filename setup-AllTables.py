@@ -18,7 +18,7 @@ def createTable(tableName,createCommand, index = None, indexedValue = None):
         SQLcommands.append(priceIndex)
 
 def executeStatements():
-    global
+    global SQLcommands
     global cursor
     global conn
 
