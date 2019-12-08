@@ -48,6 +48,14 @@ class dbManager:
         self.cursor.execute(command)
         self.conn.commit()
 
+    def getAllSoldCars(self):
+        command = "SELECT Car.CarVIN, Car.Model, Sales.CustomerName FROM Sales JOIN Car ON Car.CarVIN = Sales.SCarVIN JOIN soldCars ON SCarID = Car.CarVIN;"
+        print(command)
+        self.cursor.execute(command)
+        row = self.cursor.fetchone()
+        print(row)
+        return row
+
     def getTopSellingCar(self):
         command = "SELECT Model, COUNT(Model) FROM Car JOIN Sales ON Car.CarVIN = Sales.SCarVIN GROUP BY Model ORDER BY COUNT(Model);"
         print(command)
@@ -96,9 +104,10 @@ class dbManager:
 
 if __name__ == '__main__':
     interface = dbManager()
-    interface.addEntrySales(1, 1, 1, 'Joe Johnson', 1234567890, '1 Main Street', 23000.91)
-    interface.addEntryCars(1, 'Range Rover', 'Land Rover', 2016, 'Black', 50000, 'V8', 2, 53000, '2019-11-08')
-    interface.addEntryMaintenanceRecord(1, 1, '2019-10-17', 80.0, 90.0, '2020-01-22')
-    interface.getTopSellingCar()
-    interface.getNextService(1)
-    interface.getVehiclesUnderLimit()
+    # interface.addEntrySales(1, 1, 1, 'Joe Johnson', 1234567890, '1 Main Street', 23000.91)
+    # interface.addEntryCars(1, 'Range Rover', 'Land Rover', 2016, 'Black', 50000, 'V8', 2, 53000, '2019-11-08')
+    # interface.addEntryMaintenanceRecord(1, 1, '2019-10-17', 80.0, 90.0, '2020-01-22')
+    # interface.getTopSellingCar()
+    # interface.getNextService(1)
+    # interface.getVehiclesUnderLimit()
+    interface.getAllSoldCars()
