@@ -41,6 +41,15 @@ class dbManager:
         print(row)
         return row
 
+    def getVehiclesUnderLimit(self, limit=20000):
+        command = f"SELECT Model, Value FROM Car WHERE Value < {limit};"
+        print(command)
+        self.cursor.execute(command)
+        rows = self.cursor.fetchall()
+        for row in rows:
+            print(row)
+        return rows
+
 if __name__ == '__main__':
     interface = dbManager()
     interface.addEntrySales(1, 1, 1, 'Joe Johnson', 1234567890, '1 Main Street', 23000.91)
@@ -48,3 +57,4 @@ if __name__ == '__main__':
     interface.addEntryMaintenanceRecord(1, 1, '2019-10-17', 80.0, 90.0, '2020-01-22')
     interface.getTopSellingCar()
     interface.getNextService(1)
+    interface.getVehiclesUnderLimit()
