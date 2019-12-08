@@ -1,5 +1,5 @@
 import sqlite3
-
+import datetime
 
 class dbManager:
     def __init__(self):
@@ -73,6 +73,26 @@ class dbManager:
         for row in rows:
             print(row)
         return rows
+
+    def getTopVendor(self):
+        now = datetime.datetime.now()
+        start = f"{now.year - 1}-01-01"
+        end = f"{now.year - 1}-12-31"
+        command = f"""
+            SELECT Vendor.Name, COUNT(Vendor.Name) 
+            FROM Sales 
+            JOIN Car ON Car.CarVIN = Sales.SCarVIN 
+            JOIN Vendor ON Vendor.VendorID = Car.VendorID 
+            JOIN soldCars ON soldCars.SCarID = Sales.SCarVIN 
+            WHERE DateOfSale BETWEEN '{start}' AND '{end}' 
+            GROUP BY Vendor.Name 
+            ORDER BY COUNT(Vendor.Name) DESC;
+        """
+        print(command)
+        self.cursor.execute(command)
+        row = self.cursor.fetchone()
+        print(row)
+        return row
 
 if __name__ == '__main__':
     interface = dbManager()
