@@ -18,8 +18,32 @@ class dbManager:
         self.cursor.execute(command)
         self.conn.commit()
 
+    def addEntryStaff(self, StaffID, Name, Role, Salary, DateofEmployment, DateofBirth, Address, StaffPhone):
+        command = f"INSERT INTO Staff VALUES ({StaffID}, '{Name}', '{Role}', {Salary}, '{DateofEmployment}', '{DateofBirth}', '{Address}', {StaffPhone});"
+        print(command)
+        self.cursor.execute(command)
+        self.conn.commit()
+
+    def addEntryVendor(self, VendorID, Name, Address, PhoneNumber, VendorType):
+        command = f"INSERT INTO Vendor VALUES ({VendorID}, '{Name}', '{Address}', {PhoneNumber}, '{VendorType}');"
+        print(command)
+        self.cursor.execute(command)
+        self.conn.commit()
+
     def addEntryMaintenanceRecord(self, ServiceNumber, CarVIN, DateOfService, Expenditure, ChargeToCustomer, NextServiceDate):
         command = f"INSERT INTO MaintenanceRecord VALUES ({ServiceNumber}, {CarVIN}, '{DateOfService}', {Expenditure}, {ChargeToCustomer}, '{NextServiceDate}');"
+        print(command)
+        self.cursor.execute(command)
+        self.conn.commit()
+
+    def addEntryOnHand(self, OCarID, Availability):
+        command = f"INSERT INTO onHandCars VALUES ({OCarID}, '{Availability}');"
+        print(command)
+        self.cursor.execute(command)
+        self.conn.commit()
+
+    def addEntrySold(self, SCarID, DateofSale):
+        command = f"INSERT INTO soldCar VALUES ({SCarID}, '{DateofSale}');"
         print(command)
         self.cursor.execute(command)
         self.conn.commit()
