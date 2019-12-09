@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 
+
 class dbManager:
     def __init__(self):
         self.conn = sqlite3.connect("CS579.db")
@@ -30,7 +31,8 @@ class dbManager:
         self.cursor.execute(command)
         self.conn.commit()
 
-    def addEntryMaintenanceRecord(self, ServiceNumber, CarVIN, DateOfService, Expenditure, ChargeToCustomer, NextServiceDate):
+    def addEntryMaintenanceRecord(self, ServiceNumber, CarVIN, DateOfService, Expenditure, ChargeToCustomer,
+                                  NextServiceDate):
         command = f"INSERT INTO MaintenanceRecord VALUES ({ServiceNumber}, {CarVIN}, '{DateOfService}', {Expenditure}, {ChargeToCustomer}, '{NextServiceDate}');"
         print(command)
         self.cursor.execute(command)
@@ -49,16 +51,21 @@ class dbManager:
         self.conn.commit()
 
     def custom(self, query):
-        self.cursor.execute(query)
-        self.conn.commit()
+        print(query)
+        try:
+            self.cursor.execute(query)
+        except:
+            print("Invalid statement")
+            return [()]
         res = self.cursor.fetchall()
+        print(res)
         return res
 
     def getAllSoldCars(self):
         command = "SELECT Car.CarVIN, Car.Model, Sales.CustomerName FROM Sales JOIN Car ON Car.CarVIN = Sales.SCarVIN JOIN soldCars ON SCarID = Car.CarVIN;"
         print(command)
         self.cursor.execute(command)
-        row = self.cursor.fetchone()
+        row = self.cursor.fetchall()
         print(row)
         return row
 
@@ -93,20 +100,18 @@ class dbManager:
         start = f"{now.year - 1}-01-01"
         end = f"{now.year - 1}-12-31"
         command = f"""
-            SELECT Vendor.Name, COUNT(Vendor.Name) 
-            FROM Sales 
-            JOIN Car ON Car.CarVIN = Sales.SCarVIN 
-            JOIN Vendor ON Vendor.VendorID = Car.VendorID 
-            JOIN soldCars ON soldCars.SCarID = Sales.SCarVIN 
-            WHERE DateOfSale BETWEEN '{start}' AND '{end}' 
-            GROUP BY Vendor.Name 
-            ORDER BY COUNT(Vendor.Name) DESC;
+            SELECT Vendor.Name, count(Vendor.Name) from Vendor
+            JOIN Car ON Vendor.VendorID = Car.VendorID  
+            where PurchaseDate  BETWEEN '{start}' AND '{end}'
+            GROUP by Vendor.Name
+            ORDER by count(Vendor.Name)
         """
         print(command)
         self.cursor.execute(command)
         row = self.cursor.fetchone()
         print(row)
         return row
+
 
 if __name__ == '__main__':
     interface = dbManager()
@@ -128,6 +133,7 @@ if __name__ == '__main__':
             res = interface.getTopSellingCar()
 
         elif query == "2":
+            month = input("Enter the month")
             pass
 
         elif query == "3":
