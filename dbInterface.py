@@ -61,6 +61,19 @@ class dbManager:
         print(res)
         return res
 
+    def getTopSalesperson(self):
+        command = f"""
+            SELECT Staff.StaffID, Staff.Name, COUNT(Staff.Name) FROM Sales
+            JOIN Staff ON Staff.StaffID = Sales.StaffID
+            GROUP BY Staff.StaffID
+            ORDER BY COUNT(Staff.StaffID) DESC
+        """
+        print(command)
+        self.cursor.execute(command)
+        row = self.cursor.fetchone()
+        print(row)
+        return row
+
     def getAllSoldCars(self):
         command = "SELECT Car.CarVIN, Car.Model, Sales.CustomerName FROM Sales JOIN Car ON Car.CarVIN = Sales.SCarVIN JOIN soldCars ON SCarID = Car.CarVIN;"
         print(command)
