@@ -110,8 +110,8 @@ class dbManager:
 
     def getTopVendor(self):
         now = datetime.datetime.now()
-        start = f"{now.year - 1}-01-01"
-        end = f"{now.year - 1}-12-31"
+        start = f"{now.year}-01-01"
+        end = f"{now.year}-12-31"
         command = f"""
             SELECT Vendor.Name, count(Vendor.Name) from Vendor
             JOIN Car ON Vendor.VendorID = Car.VendorID  

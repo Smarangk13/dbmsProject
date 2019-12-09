@@ -124,7 +124,9 @@ class App(QMainWindow):
             self.formatResults([res])
 
         elif query == 2:
-            pass
+            res = self.interface.getTopSalesperson()
+            # print(res)
+            self.formatResults(res)
 
         elif query == 3:
             text = self.textboxIn.toPlainText()
