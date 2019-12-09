@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from DBMSProject.dbmsProject import dbInterface
+from dbmsProject import dbInterface
 
 
 class App(QMainWindow):
