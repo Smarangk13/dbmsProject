@@ -48,6 +48,12 @@ class dbManager:
         self.cursor.execute(command)
         self.conn.commit()
 
+    def custom(self, query):
+        self.cursor.execute(query)
+        self.conn.commit()
+        res = self.cursor.fetchall()
+        return res
+
     def getAllSoldCars(self):
         command = "SELECT Car.CarVIN, Car.Model, Sales.CustomerName FROM Sales JOIN Car ON Car.CarVIN = Sales.SCarVIN JOIN soldCars ON SCarID = Car.CarVIN;"
         print(command)
@@ -110,4 +116,29 @@ if __name__ == '__main__':
     # interface.getTopSellingCar()
     # interface.getNextService(1)
     # interface.getVehiclesUnderLimit()
-    interface.getAllSoldCars()
+    while True:
+        print("1. Which car model is the best seller ? \n"
+              "2. What is the name of the staff with the most selling record by month ?\n"
+              "3. What is Car X’s next service date ?\n"
+              "4. What are some cars available for under $20000?\n"
+              "5. Which vendor provided the most cars last year ?")
+        query = input()
+        res = 0
+        if query == "1":
+            res = interface.getTopSellingCar()
+
+        elif query == "2":
+            pass
+
+        elif query == "3":
+            vin = input("Car VIN: ")
+            res = interface.getNextService(vin)
+
+        elif query == "4":
+            budget = input("Budget : ")
+            res = interface.getVehiclesUnderLimit(budget)
+
+        elif query == "5":
+            res = interface.getTopVendor()
+
+        print(res)
