@@ -79,7 +79,7 @@ class App(QMainWindow):
         self.selectBox.resize(self.selectBoxWidth, self.selectBoxHeight)
         selectBoxOptions = ['Select Option',
                             'Which car model is the best seller ?',
-                            'What is the name of the staff with the most selling record by month ?',
+                            'What is the name of the salesman with the best sales record?',
                             'What is Car X’s next service date ?',
                             'What are some cars available for under $?',
                             'Which vendor provided the most cars last year ?']
@@ -163,7 +163,7 @@ class App(QMainWindow):
         self.formatResults(result)
 
     def formatResults(self, data):
-        if len(data) == 0:
+        if data is None or data[0] is None or len(data) == 0:
             return
         if type(data) == tuple:
             data = [data]

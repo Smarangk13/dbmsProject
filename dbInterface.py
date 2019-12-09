@@ -123,7 +123,7 @@ if __name__ == '__main__':
     # interface.getVehiclesUnderLimit()
     while True:
         print("1. Which car model is the best seller ? \n"
-              "2. What is the name of the staff with the most selling record by month ?\n"
+              "2. What is the name of the salesman with the best sales record?\n"
               "3. What is Car X’s next service date ?\n"
               "4. What are some cars available for under $20000?\n"
               "5. Which vendor provided the most cars last year ?")
