@@ -74,7 +74,7 @@ class dbManager:
         return row
 
     def getVehiclesUnderLimit(self, limit=20000):
-        command = f"SELECT Model, Value FROM Car WHERE Value < {limit};"
+        command = f"SELECT Model, Make, Value FROM Car WHERE Value < {limit};"
         print(command)
         self.cursor.execute(command)
         rows = self.cursor.fetchall()
