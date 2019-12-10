@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from dbmsProject import dbInterface
+import dbInterfaces
 
 
 class App(QMainWindow):
@@ -72,7 +72,7 @@ class App(QMainWindow):
 
         # Create Password text Line
         self.selectText.move(self.selectLabelX, self.selectLabelY)
-        self.selectText.setText("Select Query")
+        self.selectText.setText("Select")
 
         # Create textbox for Password
         self.selectBox.move(self.selectBoxX, self.selectBoxY)
@@ -90,7 +90,7 @@ class App(QMainWindow):
 
         # Create Message text line
         self.textLabel.move(self.textLabelX, self.textLabelY)
-        self.textLabel.setText("Custom Query")
+        self.textLabel.setText("Custom")
 
         # Create textbox for message
         self.textboxIn.move(self.messageBoxX, self.messageBoxY)
@@ -152,7 +152,8 @@ class App(QMainWindow):
                 message.exec_()
             else:
                 res = self.interface.getVehiclesUnderLimit(text)
-                self.formatResults(res)
+                print(res)
+                # self.formatResults(res)
 
         elif query == 5:
             res = self.interface.getTopVendor()
@@ -165,7 +166,7 @@ class App(QMainWindow):
         self.formatResults(result)
 
     def formatResults(self, data):
-        if data is None or data[0] is None or len(data) == 0:
+        if data is None or  len(data) == 0 or data[0] is None :
             return
         if type(data) == tuple:
             data = [data]

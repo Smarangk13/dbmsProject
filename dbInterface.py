@@ -92,7 +92,7 @@ class dbManager:
 
     # when is car x's next service date?
     def getNextService(self, CarVIN):
-        command = "SELECT Car.CarVIN, NextServiceDate FROM Car JOIN MaintenanceRecord ON Car.CarVIN = MaintenanceRecord.CarVIN ORDER BY DateOfService DESC;"
+        command = f"SELECT {CarVIN}, NextServiceDate FROM Car JOIN MaintenanceRecord ON Car.CarVIN = MaintenanceRecord.CarVIN ORDER BY DateOfService DESC;"
         print(command)
         self.cursor.execute(command)
         row = self.cursor.fetchone()
